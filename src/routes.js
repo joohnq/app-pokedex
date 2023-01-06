@@ -20,15 +20,15 @@ function Routes() {
             headerTitleStyle: {
               fontFamily: "Poppins_700Bold",
             },
-            headerRight: () => (
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name="theme-light-dark"
-                  size={24}
-                  color="black"
-                />
-              </TouchableOpacity>
-            ),
+            // headerRight: () => (
+            //   <TouchableOpacity>
+            //     <MaterialCommunityIcons
+            //       name="theme-light-dark"
+            //       size={24}
+            //       color="black"
+            //     />
+            //   </TouchableOpacity>
+            // ),
           }}
         />
         <Stack.Screen name="Pokemon" component={PokemonDetail} />

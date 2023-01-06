@@ -1,14 +1,8 @@
-import {
-  StyleSheet,
-  FlatList,
-  SafeAreaView,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import CardPokemon from "./CardPokemon";
 import axios from "axios";
+import { StatusBar } from "expo-status-bar";
 
 // const Data = [
 //   {
@@ -61,7 +55,7 @@ export default function Home() {
   const whatIsBgCard = (type) => {
     switch (type) {
       case "bug":
-        return "C1D88A";
+        return "85C024";
         break;
       case "dark":
         return "5A5366";
@@ -122,12 +116,21 @@ export default function Home() {
   }, []);
 
   function renderItem({ item }) {
+    let habilitieTwo;
+
+    if(item.data.types[1] == undefined) {
+      habilitieTwo = 'null'
+    }else{
+      habilitieTwo = item.data.types[1].type.name
+    }
+
     return (
       <View style={{ width: "50%" }}>
+        <StatusBar style="dark" backgroundColor="#fff"></StatusBar>
         <CardPokemon
           name={item.data.name}
           habilitieOne={item.data.types[0].type.name}
-          // habilitieTwo={item.data.types[1].type.name}
+          habilitieTwo={habilitieTwo}
           cover={item.data.sprites.other["official-artwork"].front_default}
           bgColor={whatIsBgCard(item.data.types[0].type.name)}
           id={item.data.id}

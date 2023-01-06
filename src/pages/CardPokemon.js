@@ -13,6 +13,35 @@ export default function CardPokemon(props) {
   };
 
   const styleBgColor = styleFunction(`#${props.bgColor}`);
+
+  if (props.habilitieTwo == "null") {
+    return (
+      <TouchableOpacity style={[styles.cardPokemon, styleBgColor.cardPokemon]}>
+        <View>
+          <View style={{ alignItems: "center" }}>
+            <Image
+              source={{ uri: props.cover }}
+              style={{ width: 100, height: 100, marginTop: -45 }}
+            />
+          </View>
+          <View style={styles.content}>
+            <View>
+              <Text style={styles.pId}>{functionId(props.id)}</Text>
+              <Text style={styles.pName}>{props.name}</Text>
+              <View style={styles.habilities}>
+                <Text
+                  style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
+                >
+                  {props.habilitieOne}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
     <TouchableOpacity style={[styles.cardPokemon, styleBgColor.cardPokemon]}>
       <View>
@@ -65,7 +94,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: "Poppins_700Bold",
-    textTransform: 'capitalize'
+    textTransform: "capitalize",
   },
 
   habilities: {
@@ -81,9 +110,9 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 5,
     fontSize: 10,
-    color: "#49c4ad",
     paddingHorizontal: 10,
     paddingVertical: 2,
+    textTransform: "capitalize",
   },
 });
 
