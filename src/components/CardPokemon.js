@@ -1,7 +1,23 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export default function CardPokemon(props, {useNavigation}) {
+export default function CardPokemon({
+  bgColor,
+  habilitieOne,
+  habilitieTwo,
+  cover,
+  name,
+  id,
+}) {
+  const navigation = useNavigation();
   const functionId = (id) => {
     if (Number(id) < 10) {
       return `#00${id}`;
@@ -12,27 +28,42 @@ export default function CardPokemon(props, {useNavigation}) {
     }
   };
 
-  const styleBgColor = styleFunction(`#${props.bgColor}`);
+  const styleBgColor = styleFunction(`#${bgColor}`);
 
-  if (props.habilitieTwo == "null") {
+  if (habilitieTwo == "null") {
     return (
-      <TouchableOpacity style={[styles.cardPokemon, styleBgColor.cardPokemon]}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("Detalhes")
+        }
+        style={[styles.cardPokemon, styleBgColor.cardPokemon]}
+      >
         <View>
           <View style={{ alignItems: "center" }}>
-            <Image
-              source={{ uri: props.cover }}
-              style={{ width: 100, height: 100, marginTop: -45 }}
-            />
+            <ImageBackground
+              source={require("../assets/pokebola-background.png")}
+              style={{
+                width: 80,
+                height: 80,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                source={{ uri: cover }}
+                style={{ width: 100, height: 100, marginTop: -60 }}
+              />
+            </ImageBackground>
           </View>
           <View style={styles.content}>
             <View>
-              <Text style={styles.pId}>{functionId(props.id)}</Text>
-              <Text style={styles.pName}>{props.name}</Text>
+              <Text style={styles.pId}>{functionId(id)}</Text>
+              <Text style={styles.pName}>{name}</Text>
               <View style={styles.habilities}>
                 <Text
                   style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
                 >
-                  {props.habilitieOne}
+                  {habilitieOne}
                 </Text>
               </View>
             </View>
@@ -43,29 +74,40 @@ export default function CardPokemon(props, {useNavigation}) {
   } else {
     return (
       <TouchableOpacity
+        onPress={() => navigation.navigate("Detalhes", { id: id })}
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
         <View>
           <View style={{ alignItems: "center" }}>
-            <Image
-              source={{ uri: props.cover }}
-              style={{ width: 100, height: 100, marginTop: -45 }}
-            />
+            <ImageBackground
+              source={require("../assets/pokebola-background.png")}
+              style={{
+                width: 80,
+                height: 80,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                source={{ uri: cover }}
+                style={{ width: 100, height: 100, marginTop: -60 }}
+              />
+            </ImageBackground>
           </View>
           <View style={styles.content}>
             <View>
-              <Text style={styles.pId}>{functionId(props.id)}</Text>
-              <Text style={styles.pName}>{props.name}</Text>
+              <Text style={styles.pId}>{functionId(id)}</Text>
+              <Text style={styles.pName}>{name}</Text>
               <View style={styles.habilities}>
                 <Text
                   style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
                 >
-                  {props.habilitieOne}
+                  {habilitieOne}
                 </Text>
                 <Text
                   style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
                 >
-                  {props.habilitieTwo}
+                  {habilitieTwo}
                 </Text>
               </View>
             </View>
@@ -80,7 +122,7 @@ const styles = StyleSheet.create({
   cardPokemon: {
     flexDirection: "column",
     padding: 10,
-    margin: 5,
+    marginHorizontal: 5,
     borderRadius: 10,
     marginTop: 40,
     elevation: 7,

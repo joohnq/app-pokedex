@@ -1,15 +1,15 @@
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, SafeAreaView, View, Text, Button } from "react-native";
 import React, { useState, useEffect } from "react";
-import CardPokemon from "./CardPokemon";
+import CardPokemon from "../components/CardPokemon";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 
-export default function Home() {
+export default function Pokedex() {
   const [listPokemons, setListPokemons] = useState([]);
 
   const catchPokemons = () => {
     const endpoints = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 50; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
     }
     axios
@@ -105,7 +105,7 @@ export default function Home() {
   }
 
   return (
-    <SafeAreaView style={{ padding: 10, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
       <FlatList
         data={listPokemons}
         renderItem={renderItem}
