@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 
-export default function CardPokemon(props) {
+export default function CardPokemon(props, {useNavigation}) {
   const functionId = (id) => {
     if (Number(id) < 10) {
       return `#00${id}`;
@@ -40,38 +40,40 @@ export default function CardPokemon(props) {
         </View>
       </TouchableOpacity>
     );
-  }
-
-  return (
-    <TouchableOpacity style={[styles.cardPokemon, styleBgColor.cardPokemon]}>
-      <View>
-        <View style={{ alignItems: "center" }}>
-          <Image
-            source={{ uri: props.cover }}
-            style={{ width: 100, height: 100, marginTop: -45 }}
-          />
-        </View>
-        <View style={styles.content}>
-          <View>
-            <Text style={styles.pId}>{functionId(props.id)}</Text>
-            <Text style={styles.pName}>{props.name}</Text>
-            <View style={styles.habilities}>
-              <Text
-                style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
-              >
-                {props.habilitieOne}
-              </Text>
-              <Text
-                style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
-              >
-                {props.habilitieTwo}
-              </Text>
+  } else {
+    return (
+      <TouchableOpacity
+        style={[styles.cardPokemon, styleBgColor.cardPokemon]}
+      >
+        <View>
+          <View style={{ alignItems: "center" }}>
+            <Image
+              source={{ uri: props.cover }}
+              style={{ width: 100, height: 100, marginTop: -45 }}
+            />
+          </View>
+          <View style={styles.content}>
+            <View>
+              <Text style={styles.pId}>{functionId(props.id)}</Text>
+              <Text style={styles.pName}>{props.name}</Text>
+              <View style={styles.habilities}>
+                <Text
+                  style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
+                >
+                  {props.habilitieOne}
+                </Text>
+                <Text
+                  style={[styles.pHabilitieTitle, styleBgColor.pHabilitieTitle]}
+                >
+                  {props.habilitieTwo}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     marginTop: 40,
-    elevation: 2,
+    elevation: 7,
   },
 
   pId: {

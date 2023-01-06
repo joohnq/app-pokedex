@@ -1,43 +1,8 @@
-import { StyleSheet, FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import CardPokemon from "./CardPokemon";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
-
-// const Data = [
-//   {
-//     id: "1",
-//     name: "Bulbasaur",
-//     habilitieOne: "Glass",
-//     habilitieTwo: "Poison",
-//     cover: require("../assets/bulbasaur.png"),
-//     bgColor: "49c4ad",
-//   },
-//   {
-//     id: "2",
-//     name: "Charmander",
-//     habilitieOne: "Fire",
-//     habilitieTwo: "Resistenceddddd",
-//     cover: require("../assets/charmander.png"),
-//     bgColor: "FC6C6D",
-//   },
-//   {
-//     id: "3",
-//     name: "Charmander",
-//     habilitieOne: "Fire",
-//     habilitieTwo: "Resistenceddddd",
-//     cover: require("../assets/charmander.png"),
-//     bgColor: "FC6C6D",
-//   },
-//   {
-//     id: "4",
-//     name: "Charmander",
-//     habilitieOne: "Fire",
-//     habilitieTwo: "Resistenceddddd",
-//     cover: require("../assets/charmander.png"),
-//     bgColor: "FC6C6D",
-//   },
-// ];
 
 export default function Home() {
   const [listPokemons, setListPokemons] = useState([]);
@@ -118,10 +83,10 @@ export default function Home() {
   function renderItem({ item }) {
     let habilitieTwo;
 
-    if(item.data.types[1] == undefined) {
-      habilitieTwo = 'null'
-    }else{
-      habilitieTwo = item.data.types[1].type.name
+    if (item.data.types[1] == undefined) {
+      habilitieTwo = "null";
+    } else {
+      habilitieTwo = item.data.types[1].type.name;
     }
 
     return (
@@ -140,7 +105,7 @@ export default function Home() {
   }
 
   return (
-    <SafeAreaView style={{ padding: 10 }}>
+    <SafeAreaView style={{ padding: 10, backgroundColor: "#fff" }}>
       <FlatList
         data={listPokemons}
         renderItem={renderItem}
@@ -150,5 +115,3 @@ export default function Home() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({});
