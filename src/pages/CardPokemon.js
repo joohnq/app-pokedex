@@ -18,7 +18,7 @@ export default function CardPokemon(props) {
       <View>
         <View style={{ alignItems: "center" }}>
           <Image
-            source={props.cover}
+            source={{ uri: props.cover }}
             style={{ width: 100, height: 100, marginTop: -45 }}
           />
         </View>
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontFamily: "Poppins_700Bold",
+    textTransform: 'capitalize'
   },
 
   habilities: {

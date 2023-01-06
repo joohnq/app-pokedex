@@ -48,21 +48,73 @@ import axios from "axios";
 export default function Home() {
   const [listPokemons, setListPokemons] = useState([]);
 
-  const catchPokemons = async () => {
+  const catchPokemons = () => {
     const endpoints = [];
-
-    for (let i = 1; i <= 2; i++) {
+    for (let i = 1; i <= 20; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
     }
+    axios
+      .all(endpoints.map((endpoint) => axios.get(endpoint)))
+      .then((data) => setListPokemons(data));
+  };
 
-    await axios.all(
-      endpoints.map((endpoint) => {
-        axios
-          .get(endpoint)
-          .then((res) => setListPokemons(res))// ERROORRRRRRRRRRRRRRRRRRRRRRRRR
-          .catch((err) => console.log(err));
-      })
-    );
+  const whatIsBgCard = (type) => {
+    switch (type) {
+      case "bug":
+        return "C1D88A";
+        break;
+      case "dark":
+        return "5A5366";
+        break;
+      case "dragon":
+        return "086EC0";
+        break;
+      case "electric":
+        return "F4D23C";
+        break;
+      case "fairy":
+        return "EC8DE4";
+        break;
+      case "fighting":
+        return "D34870";
+        break;
+      case "fire":
+        return "F08080";
+        break;
+      case "flying":
+        return "8FA8DD";
+        break;
+      case "ghost":
+        return "5369AD";
+        break;
+      case "grass":
+        return "5FB953";
+        break;
+      case "ground":
+        return "D97746";
+        break;
+      case "ice":
+        return "75D0C2";
+        break;
+      case "normal":
+        return "919AA1";
+        break;
+      case "poison":
+        return "A566C7";
+        break;
+      case "psychic":
+        return "FFA399";
+        break;
+      case "rock":
+        return "C8B98C";
+        break;
+      case "steel":
+        return "52889C";
+        break;
+      case "water":
+        return "5091D6";
+        break;
+    }
   };
 
   useEffect(() => {
@@ -73,12 +125,12 @@ export default function Home() {
     return (
       <View style={{ width: "50%" }}>
         <CardPokemon
-          name={item.name}
-          habilitieOne={item.habilitieOne}
-          habilitieTwo={item.habilitieTwo}
-          cover={item.cover}
-          bgColor={item.bgColor}
-          id={item.id}
+          name={item.data.name}
+          habilitieOne={item.data.types[0].type.name}
+          // habilitieTwo={item.data.types[1].type.name}
+          cover={item.data.sprites.other["official-artwork"].front_default}
+          bgColor={whatIsBgCard(item.data.types[0].type.name)}
+          id={item.data.id}
         />
       </View>
     );
@@ -86,12 +138,12 @@ export default function Home() {
 
   return (
     <SafeAreaView style={{ padding: 10 }}>
-      {/* <FlatList
+      <FlatList
         data={listPokemons}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.data.id}
         numColumns={2}
-      /> */}
+      />
     </SafeAreaView>
   );
 }
