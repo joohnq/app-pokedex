@@ -5,6 +5,7 @@ import {
   View,
   Image,
   ImageBackground,
+  TouchableOpacity,
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -56,13 +57,15 @@ export default function PokemonDetail({ route }) {
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
             <View style={{ alignItems: "flex-start" }}>
-              <MaterialIcons
-                name="keyboard-arrow-left"
-                size={30}
-                color="black"
-                style={styles.arrowBack}
-                onPress={() => navigation.goBack()}
-              />
+              <TouchableOpacity>
+                <MaterialIcons
+                  name="keyboard-arrow-left"
+                  size={30}
+                  color="black"
+                  style={styles.arrowBack}
+                  onPress={() => navigation.goBack()}
+                />
+              </TouchableOpacity>
             </View>
             <View style={{ alignItems: "center" }}>
               <Image
@@ -89,7 +92,7 @@ export default function PokemonDetail({ route }) {
                 </Text>
               </View>
             </View>
-            <View style={{ marginVertical: 10}}>
+            <View style={{ marginVertical: 10 }}>
               <Text style={styles.pDesc}>{pokemonDesc}</Text>
             </View>
             <View>
@@ -135,13 +138,15 @@ export default function PokemonDetail({ route }) {
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
             <View style={{ alignItems: "flex-start" }}>
-              <MaterialIcons
-                name="keyboard-arrow-left"
-                size={30}
-                color="black"
-                style={styles.arrowBack}
-                onPress={() => navigation.goBack()}
-              />
+              <TouchableOpacity>
+                <MaterialIcons
+                  name="keyboard-arrow-left"
+                  size={30}
+                  color="black"
+                  style={styles.arrowBack}
+                  onPress={() => navigation.goBack()}
+                />
+              </TouchableOpacity>
             </View>
             <View style={{ alignItems: "center" }}>
               <Image
@@ -235,7 +240,7 @@ const styles = StyleSheet.create({
 
   pName: {
     color: "#000",
-    fontSize: 20,
+    fontSize: 24,
     fontFamily: "Poppins_700Bold",
     textTransform: "capitalize",
   },
@@ -273,7 +278,7 @@ const styles = StyleSheet.create({
   subtitles: {
     fontFamily: "Poppins_600SemiBold",
     marginVertical: 10,
-    fontSize: 14,
+    fontSize: 18,
   },
 
   evolutions: {
