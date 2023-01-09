@@ -80,6 +80,16 @@ export default function PokemonDetail({ route }) {
                 }}
               />
             </View>
+            <Image
+              source={require("../assets/wavesOpacity.png")}
+              style={{
+                width: "100%",
+                height: 150,
+                position: "absolute",
+                bottom: 0,
+                zIndex: -1,
+              }}
+            />
           </View>
           <View style={styles.content}>
             <View style={styles.info}>
@@ -159,6 +169,16 @@ export default function PokemonDetail({ route }) {
                 }}
               />
             </View>
+            <Image
+              source={require("../assets/wavesOpacity.png")}
+              style={{
+                width: "100%",
+                height: 150,
+                position: "absolute",
+                bottom: 0,
+                zIndex: -1,
+              }}
+            />
           </View>
           <View style={styles.content}>
             <View style={styles.info}>
@@ -216,6 +236,7 @@ export default function PokemonDetail({ route }) {
       </>
     );
   }
+  a;
 }
 
 const styles = StyleSheet.create({
@@ -223,6 +244,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
+    position: "relative",
   },
 
   arrowBack: {
