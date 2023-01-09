@@ -18,7 +18,6 @@ function Routes() {
           component={Pokedex}
           options={{
             headerTitle: "",
-            // headerShadowVisible: false,
             headerLeft: () => (
               <TouchableOpacity
                 style={{
@@ -49,16 +48,7 @@ function Routes() {
           name="Detalhes"
           component={PokemonDetail}
           options={{
-            headerTitle: "",
-            headerTransparent: true,
-            headerLeftContainerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleStyle: {
-              fontFamily: "Poppins_700Bold",
-              fontSize: 28,
-            },
-            headerTitleAlign: "center",
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

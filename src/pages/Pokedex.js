@@ -3,77 +3,19 @@ import React, { useState, useEffect } from "react";
 import CardPokemon from "../components/CardPokemon";
 import axios from "axios";
 import { StatusBar } from "expo-status-bar";
+import WhatIsBgCard from "../components/WhatIsBgCard";
 
 export default function Pokedex() {
   const [listPokemons, setListPokemons] = useState([]);
 
   const catchPokemons = () => {
     const endpoints = [];
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 20; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
     }
     axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then((data) => setListPokemons(data));
-  };
-
-  const whatIsBgCard = (type) => {
-    switch (type) {
-      case "bug":
-        return "85C024";
-        break;
-      case "dark":
-        return "5A5366";
-        break;
-      case "dragon":
-        return "086EC0";
-        break;
-      case "electric":
-        return "F4D23C";
-        break;
-      case "fairy":
-        return "EC8DE4";
-        break;
-      case "fighting":
-        return "D34870";
-        break;
-      case "fire":
-        return "F08080";
-        break;
-      case "flying":
-        return "8FA8DD";
-        break;
-      case "ghost":
-        return "5369AD";
-        break;
-      case "grass":
-        return "5FB953";
-        break;
-      case "ground":
-        return "D97746";
-        break;
-      case "ice":
-        return "75D0C2";
-        break;
-      case "normal":
-        return "919AA1";
-        break;
-      case "poison":
-        return "A566C7";
-        break;
-      case "psychic":
-        return "FFA399";
-        break;
-      case "rock":
-        return "C8B98C";
-        break;
-      case "steel":
-        return "52889C";
-        break;
-      case "water":
-        return "5091D6";
-        break;
-    }
   };
 
   useEffect(() => {
@@ -97,7 +39,7 @@ export default function Pokedex() {
           habilitieOne={item.data.types[0].type.name}
           habilitieTwo={habilitieTwo}
           cover={item.data.sprites.other["official-artwork"].front_default}
-          bgColor={whatIsBgCard(item.data.types[0].type.name)}
+          bgColor={WhatIsBgCard(item.data.types[0].type.name)}
           id={item.data.id}
         />
       </View>
