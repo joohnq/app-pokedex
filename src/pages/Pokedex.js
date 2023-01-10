@@ -10,7 +10,7 @@ export default function Pokedex() {
 
   const catchPokemons = () => {
     const endpoints = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 30; i++) {
       endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
     }
     axios
@@ -20,6 +20,7 @@ export default function Pokedex() {
 
   useEffect(() => {
     catchPokemons();
+    // console.log(listPokemons.data.sprites.other["dream_world"].front_default)
   }, []);
 
   function renderItem({ item }) {
