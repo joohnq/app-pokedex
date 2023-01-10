@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
 import WhatIsBgCard from "../components/WhatIsBgCard";
+import BarProgress from "../components/BarProgress";
 
 export default function PokemonDetail({ route }) {
   const navigation = useNavigation();
@@ -22,6 +23,14 @@ export default function PokemonDetail({ route }) {
   const [pokemonDesc, setPokemonDesc] = useState("Loading...");
   const [pokemonHabOne, setPokemonHabOne] = useState("Loading...");
   const [pokemonHabTwo, setPokemonHabTwo] = useState("");
+
+  const [pokemonHp, setPokemonHp] = useState("");
+  const [pokemonAtk, setPokemonAtk] = useState("");
+  const [pokemonDef, setPokemonDef] = useState("");
+  const [pokemonSpd, setPokemonSpd] = useState("");
+  const [pokemonSa, setPokemonSa] = useState("");
+  const [pokemonSd, setPokemonSd] = useState("");
+
   const styleBgColor = styleFunction(`#${WhatIsBgCard(pokemonHabOne)}`);
 
   useEffect(() => {
@@ -38,12 +47,18 @@ export default function PokemonDetail({ route }) {
       } else {
         setPokemonHabTwo(res.data.types[1].type.name);
       }
+      setPokemonHp(res.data.stats[0].base_stat);
+      setPokemonAtk(res.data.stats[1].base_stat);
+      setPokemonDef(res.data.stats[2].base_stat);
+      setPokemonSa(res.data.stats[3].base_stat);
+      setPokemonSd(res.data.stats[4].base_stat);
+      setPokemonSpd(res.data.stats[5].base_stat);
     });
 
     axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
       res.data.flavor_text_entries.filter((item) => {
         if (item.language.name == "en" && item.version.name == "red") {
-          const newText = item.flavor_text.replace(/(\r\n|\n|\r)/gm, "");
+          const newText = item.flavor_text.replace(/(\r\n|\n|\r)/gm, " ");
           setPokemonDesc(newText);
         }
       });
@@ -91,7 +106,7 @@ export default function PokemonDetail({ route }) {
               }}
             />
           </View>
-          <View style={styles.content}>
+          <View style={{ padding: 20 }}>
             <View style={styles.info}>
               <Text style={styles.pName}>{pokemonName}</Text>
               <View style={{ flexDirection: "row" }}>
@@ -107,35 +122,16 @@ export default function PokemonDetail({ route }) {
             </View>
             <View>
               <View>
-                <Text style={styles.subtitles}>Weakness</Text>
+                <Text style={styles.subtitles}>Base Stats</Text>
               </View>
-              <View style={styles.weakness}>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-              </View>
-            </View>
-            <View>
-              <View>
-                <Text style={styles.subtitles}>Evolutions</Text>
-              </View>
-              <View style={styles.evolutions}>
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80 }}
-                />
-                <Feather name="arrow-right" size={24} color="black" />
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80 }}
-                />
-                <Feather name="arrow-right" size={24} color="black" />
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80, marginHorizontal: 10 }}
-                />
-              </View>
+              <BarProgress
+                hp={pokemonHp}
+                atk={pokemonAtk}
+                def={pokemonDef}
+                spd={pokemonSpd}
+                sa={pokemonSa}
+                sd={pokemonSd}
+              />
             </View>
           </View>
         </ScrollView>
@@ -180,7 +176,7 @@ export default function PokemonDetail({ route }) {
               }}
             />
           </View>
-          <View style={styles.content}>
+          <View style={{ padding: 20 }}>
             <View style={styles.info}>
               <Text style={styles.pName}>{pokemonName}</Text>
               <View style={{ flexDirection: "row" }}>
@@ -196,47 +192,27 @@ export default function PokemonDetail({ route }) {
                 </Text>
               </View>
             </View>
-            <View style={{ marginVertical: 10 }}>
+            <View style={{ marginVertical: 5 }}>
               <Text style={styles.pDesc}>{pokemonDesc}</Text>
             </View>
             <View>
               <View>
-                <Text style={styles.subtitles}>Weakness</Text>
+                <Text style={styles.subtitles}>Base Stats</Text>
               </View>
-              <View style={styles.weakness}>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-                <Text style={styles.pHabilitieTitle}>Grass</Text>
-              </View>
-            </View>
-            <View>
-              <View>
-                <Text style={styles.subtitles}>Evolutions</Text>
-              </View>
-              <View style={styles.evolutions}>
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80 }}
-                />
-                <Feather name="arrow-right" size={24} color="black" />
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80 }}
-                />
-                <Feather name="arrow-right" size={24} color="black" />
-                <Image
-                  source={require("../assets/bulbasaur.png")}
-                  style={{ width: 80, height: 80, marginHorizontal: 10 }}
-                />
-              </View>
+              <BarProgress
+                hp={pokemonHp}
+                atk={pokemonAtk}
+                def={pokemonDef}
+                spd={pokemonSpd}
+                sa={pokemonSa}
+                sd={pokemonSd}
+              />
             </View>
           </View>
         </ScrollView>
       </>
     );
   }
-  a;
 }
 
 const styles = StyleSheet.create({
@@ -248,16 +224,11 @@ const styles = StyleSheet.create({
   },
 
   arrowBack: {
-    // backgroundColor: "#000",
     color: "#e4e4e4",
     padding: 5,
     borderRadius: 44 / 2,
     marginLeft: 20,
     marginTop: 20,
-  },
-
-  content: {
-    padding: 20,
   },
 
   pName: {
@@ -283,30 +254,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     color: "#fff",
     borderRadius: 10,
-    marginBottom: 5,
     marginLeft: 10,
-    marginTop: 5,
     fontSize: 10,
     paddingHorizontal: 10,
     paddingVertical: 2,
     textTransform: "capitalize",
   },
 
-  weakness: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
   subtitles: {
     fontFamily: "Poppins_600SemiBold",
-    marginVertical: 10,
-    fontSize: 18,
-  },
-
-  evolutions: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    fontSize: 22,
+    textAlign: "center",
   },
 });
 
