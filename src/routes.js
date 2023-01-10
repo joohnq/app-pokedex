@@ -1,11 +1,10 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TouchableOpacity, Text } from "react-native";
+import { Text, View } from "react-native";
 import Pokedex from "./pages/Pokedex";
 import PokemonDetail from "./pages/PokemonDetail";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,31 +16,12 @@ function Routes() {
           name="Pokedex"
           component={Pokedex}
           options={{
-            headerTitle: "",
-            headerLeft: () => (
-              <TouchableOpacity
-                style={{
-                  alignItems: "center",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="pokeball"
-                  size={35}
-                  color="black"
-                  style={{ marginRight: 5 }}
-                />
-                <Text
-                  style={{
-                    fontFamily: "Poppins_700Bold",
-                    fontSize: 28,
-                  }}
-                >
-                  Pokedex
-                </Text>
-              </TouchableOpacity>
-            ),
+            headerTitle: "Pokedex",
+            headerTitleStyle: {
+                fontFamily: "Poppins_700Bold",
+                fontSize: 28,
+            },
+            headerTitleAlign: "center",
           }}
         />
         <Stack.Screen

@@ -248,8 +248,8 @@ const styles = StyleSheet.create({
   },
 
   arrowBack: {
-    backgroundColor: "#000",
-    color: "#e5e5e5",
+    // backgroundColor: "#000",
+    color: "#e4e4e4",
     padding: 5,
     borderRadius: 44 / 2,
     marginLeft: 20,
