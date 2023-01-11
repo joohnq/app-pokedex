@@ -4,12 +4,11 @@ import {
   ScrollView,
   View,
   Image,
-  ImageBackground,
   TouchableOpacity,
   StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Feather } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import axios from "axios";
@@ -19,6 +18,7 @@ import BarProgress from "../components/BarProgress";
 export default function PokemonDetail({ route }) {
   const navigation = useNavigation();
   const [pokemonName, setPokemonName] = useState("Loading...");
+  const [pokemonWeight, setPokemonWeight] = useState("Loading...");
   const [pokemonCover, setPokemonCover] = useState("Loading...");
   const [pokemonDesc, setPokemonDesc] = useState("Loading...");
   const [pokemonHabOne, setPokemonHabOne] = useState("Loading...");
@@ -40,6 +40,7 @@ export default function PokemonDetail({ route }) {
   const catchPokemon = (id) => {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
       setPokemonName(res.data.name);
+      setPokemonWeight(res.data.weight);
       setPokemonCover(res.data.sprites.other["official-artwork"].front_default);
       setPokemonHabOne(res.data.types[0].type.name);
       if (res.data.types[1] == undefined) {
@@ -71,16 +72,26 @@ export default function PokemonDetail({ route }) {
         <StatusBar translucent={false}></StatusBar>
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
-            <View style={{ alignItems: "flex-start" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexDirection: "row",
+              }}
+            >
               <TouchableOpacity>
                 <MaterialIcons
                   name="keyboard-arrow-left"
                   size={30}
-                  color="black"
+                  color="#fff"
                   style={styles.arrowBack}
                   onPress={() => navigation.goBack()}
                 />
               </TouchableOpacity>
+              <View style={{ marginRight: 20, marginTop: 20 }}>
+                <FontAwesome5 name="weight" size={25} color="#fff" />
+                <Text style={styles.weight}>{pokemonWeight}</Text>
+              </View>
             </View>
             <View style={{ alignItems: "center" }}>
               <Image
@@ -143,7 +154,13 @@ export default function PokemonDetail({ route }) {
         <StatusBar translucent={false}></StatusBar>
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
-            <View style={{ alignItems: "flex-start" }}>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexDirection: "row",
+              }}
+            >
               <TouchableOpacity>
                 <MaterialIcons
                   name="keyboard-arrow-left"
@@ -153,6 +170,10 @@ export default function PokemonDetail({ route }) {
                   onPress={() => navigation.goBack()}
                 />
               </TouchableOpacity>
+              <View style={{ marginRight: 20, marginTop: 20 }}>
+                <FontAwesome5 name="weight" size={25} color="#fff" />
+                <Text style={styles.weight}>{pokemonWeight}</Text>
+              </View>
             </View>
             <View style={{ alignItems: "center" }}>
               <Image
@@ -229,6 +250,12 @@ const styles = StyleSheet.create({
     borderRadius: 44 / 2,
     marginLeft: 20,
     marginTop: 20,
+  },
+
+  weight: {
+    fontFamily: "Poppins_600SemiBold",
+    color: "#fff",
+    textAlign: "center",
   },
 
   pName: {
