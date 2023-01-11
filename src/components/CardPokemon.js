@@ -1,3 +1,4 @@
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -6,7 +7,6 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 export default function CardPokemon({

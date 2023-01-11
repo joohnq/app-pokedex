@@ -1,9 +1,9 @@
-import { FlatList, SafeAreaView, View, Text, Button } from "react-native";
 import React, { useState, useEffect } from "react";
-import CardPokemon from "../components/CardPokemon";
-import axios from "axios";
+import { FlatList, SafeAreaView, View, Text, Button } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
+import axios from "axios";
 
 export default function Pokedex() {
   const [listPokemons, setListPokemons] = useState([]);
@@ -20,7 +20,6 @@ export default function Pokedex() {
 
   useEffect(() => {
     catchPokemons();
-    // console.log(listPokemons.data.sprites.other["dream_world"].front_default)
   }, []);
 
   function renderItem({ item }) {

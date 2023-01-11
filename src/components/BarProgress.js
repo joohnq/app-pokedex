@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 
 export default function BarProgress({ hp, atk, def, spd, sa, sd }) {

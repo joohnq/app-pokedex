@@ -1,10 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Text, View } from "react-native";
 import Pokedex from "./pages/Pokedex";
 import PokemonDetail from "./pages/PokemonDetail";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +16,8 @@ function Routes() {
           options={{
             headerTitle: "Pokedex",
             headerTitleStyle: {
-                fontFamily: "Poppins_700Bold",
-                fontSize: 28,
+              fontFamily: "Poppins_700Bold",
+              fontSize: 28,
             },
             headerTitleAlign: "center",
           }}

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +8,12 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { MaterialIcons } from "@expo/vector-icons";
-import axios from "axios";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import BarProgress from "../components/BarProgress";
+import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
+import axios from "axios";
 
 export default function PokemonDetail({ route }) {
   const navigation = useNavigation();
