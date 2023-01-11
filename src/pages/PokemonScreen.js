@@ -292,6 +292,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
     fontSize: 22,
     textAlign: "center",
+    marginVertical: 10
   },
 });
 

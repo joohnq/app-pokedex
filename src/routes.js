@@ -11,7 +11,7 @@ export function HomeStackScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Pokedex"
         component={PokedexScreen}
         options={{
           headerTitle: "Pokedex",
@@ -34,7 +34,7 @@ export function HomeStackScreen() {
 export function SearchStackScreen() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen name="SearchPokemon" component={SearchScreen} />
     </Stack.Navigator>
   );
 }
