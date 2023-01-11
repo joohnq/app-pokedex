@@ -5,7 +5,7 @@ import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import axios from "axios";
 
-export default function Pokedex() {
+export default function PokedexScreen() {
   const [listPokemons, setListPokemons] = useState([]);
 
   const catchPokemons = () => {

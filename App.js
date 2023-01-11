@@ -1,7 +1,10 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet } from "react-native";
-import Routes from "./src/routes";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { HomeStackScreen, SearchStackScreen } from "./src/routes";
+
+const Tab = createMaterialBottomTabNavigator();
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -21,18 +24,11 @@ export default function App() {
   }
 
   return (
-    <>
-      <StatusBar style="dark" />
-      <Routes />
-    </>
+    <NavigationContainer>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Search" component={SearchStackScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

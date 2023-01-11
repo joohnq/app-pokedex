@@ -15,10 +15,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import axios from "axios";
 
-export default function PokemonDetail({ route }) {
+export default function PokemonScreen({ route }) {
   const navigation = useNavigation();
   const [pokemonName, setPokemonName] = useState("Loading...");
-  const [pokemonWeight, setPokemonWeight] = useState("Loading...");
+  const [pokemonWeight, setPokemonWeight] = useState("...");
   const [pokemonCover, setPokemonCover] = useState("Loading...");
   const [pokemonDesc, setPokemonDesc] = useState("Loading...");
   const [pokemonHabOne, setPokemonHabOne] = useState("Loading...");
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
 
   arrowBack: {
-    color: "#e4e4e4",
+    color: "#fff",
     padding: 5,
     borderRadius: 44 / 2,
     marginLeft: 20,

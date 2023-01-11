@@ -33,7 +33,9 @@ export default function CardPokemon({
   if (habilitieTwo == "null") {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Detalhes", { id: id })}
+        onPress={() =>
+          navigation.navigate("Detail", { id: id })
+        }
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
         <View>
@@ -72,7 +74,7 @@ export default function CardPokemon({
   } else {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Detalhes", { id: id })}
+        onPress={() => navigation.navigate("Detail", { id: id })}
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
         <View>

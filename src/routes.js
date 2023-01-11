@@ -1,37 +1,40 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Pokedex from "./pages/Pokedex";
-import PokemonDetail from "./pages/PokemonDetail";
+
+import PokedexScreen from "./pages/PokedexScreen";
+import PokemonScreen from "./pages/PokemonScreen";
+import SearchScreen from "./pages/SearchScreen";
 
 const Stack = createNativeStackNavigator();
 
-function Routes() {
+export function HomeStackScreen() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Pokedex"
-          component={Pokedex}
-          options={{
-            headerTitle: "Pokedex",
-            headerTitleStyle: {
-              fontFamily: "Poppins_700Bold",
-              fontSize: 28,
-            },
-            headerTitleAlign: "center",
-          }}
-        />
-        <Stack.Screen
-          name="Detalhes"
-          component={PokemonDetail}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={PokedexScreen}
+        options={{
+          headerTitle: "Pokedex",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontFamily: "Poppins_700Bold",
+            fontSize: 28,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={PokemonScreen}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
 
-export default Routes;
+export function SearchStackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Search" component={SearchScreen} />
+    </Stack.Navigator>
+  );
+}
