@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function SearchScreen() {
+export default function Search() {
   return (
     <View>
-      <Text>Search</Text>
+      <Text style={{marginTop: 50}}>Search</Text>
     </View>
   )
 }

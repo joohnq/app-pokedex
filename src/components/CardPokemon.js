@@ -7,7 +7,16 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+
+function organizeId(id){
+  if (Number(id) < 10) {
+    return `#00${id}`;
+  } else if (Number(id) >= 10 && Number(id) <= 100) {
+    return `#0${id}`;
+  } else if (Number(id) >= 100) {
+    return `#${id}`;
+  }
+}
 
 export default function CardPokemon({
   bgColor,
@@ -16,17 +25,8 @@ export default function CardPokemon({
   cover,
   name,
   id,
+  navigation
 }) {
-  const navigation = useNavigation();
-  const functionId = (id) => {
-    if (Number(id) < 10) {
-      return `#00${id}`;
-    } else if (Number(id) >= 10 && Number(id) <= 100) {
-      return `#0${id}`;
-    } else if (Number(id) >= 100) {
-      return `#${id}`;
-    }
-  };
 
   const styleBgColor = styleFunction(`#${bgColor}`);
 
@@ -34,7 +34,7 @@ export default function CardPokemon({
     return (
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("Detail", { id: id })
+          navigation.navigate("PokemonDetail", { id: id })
         }
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
@@ -57,7 +57,7 @@ export default function CardPokemon({
           </View>
           <View style={styles.content}>
             <View>
-              <Text style={styles.pId}>{functionId(id)}</Text>
+              <Text style={styles.pId}>{organizeId(id)}</Text>
               <Text style={styles.pName}>{name}</Text>
               <View style={styles.habilities}>
                 <Text
@@ -74,7 +74,7 @@ export default function CardPokemon({
   } else {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Detail", { id: id })}
+        onPress={() => navigation.navigate("PokemonDetail", { id: id })}
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
         <View>
@@ -96,7 +96,7 @@ export default function CardPokemon({
           </View>
           <View style={styles.content}>
             <View>
-              <Text style={styles.pId}>{functionId(id)}</Text>
+              <Text style={styles.pId}>{organizeId(id)}</Text>
               <Text style={styles.pName}>{name}</Text>
               <View style={styles.habilities}>
                 <Text
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginHorizontal: 5,
     borderRadius: 10,
-    marginTop: 40,
+    marginTop: 50,
     elevation: 7,
   },
 

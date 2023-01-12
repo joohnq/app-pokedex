@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, SafeAreaView, View, Text, Button } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import axios from "axios";
 
-export default function PokedexScreen() {
+export default function PokedexScreen({ navigation }) {
   const [listPokemons, setListPokemons] = useState([]);
 
   const catchPokemons = () => {
@@ -22,7 +22,7 @@ export default function PokedexScreen() {
     catchPokemons();
   }, []);
 
-  function renderItem({ item }) {
+  function renderPokemon({ item }) {
     let habilitieTwo;
 
     if (item.data.types[1] == undefined) {
@@ -33,7 +33,6 @@ export default function PokedexScreen() {
 
     return (
       <View style={{ width: "50%" }}>
-        <StatusBar style="dark" backgroundColor="#fff"></StatusBar>
         <CardPokemon
           name={item.data.name}
           habilitieOne={item.data.types[0].type.name}
@@ -41,6 +40,7 @@ export default function PokedexScreen() {
           cover={item.data.sprites.other["official-artwork"].front_default}
           bgColor={WhatIsBgCard(item.data.types[0].type.name)}
           id={item.data.id}
+          navigation={navigation}
         />
       </View>
     );
@@ -50,7 +50,7 @@ export default function PokedexScreen() {
     <SafeAreaView style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
       <FlatList
         data={listPokemons}
-        renderItem={renderItem}
+        renderItem={renderPokemon}
         keyExtractor={(item) => item.data.id}
         numColumns={2}
       />

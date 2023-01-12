@@ -8,15 +8,13 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import BarProgress from "../components/BarProgress";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import axios from "axios";
 
-export default function PokemonScreen({ route }) {
-  const navigation = useNavigation();
+export default function PokemonScreen({ route, navigation }) {
   const [pokemonName, setPokemonName] = useState("Loading...");
   const [pokemonWeight, setPokemonWeight] = useState("...");
   const [pokemonCover, setPokemonCover] = useState("Loading...");
