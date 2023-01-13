@@ -17,9 +17,7 @@ import {
 const Stack = createNativeStackNavigator();
 
 function Tabs() {
-  return (
-    <BottomTabNavigator/>
-  );
+  return <BottomTabNavigator />;
 }
 
 export default function App() {
@@ -35,7 +33,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="#fff" />
+      <StatusBar style="light" backgroundColor="#DE092D" />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
