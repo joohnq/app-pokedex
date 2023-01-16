@@ -29,7 +29,9 @@ export default function PokemonScreen({ route, navigation }) {
   const [pokemonSa, setPokemonSa] = useState("");
   const [pokemonSd, setPokemonSd] = useState("");
 
-  const styleBgColor = styleFunction(`#${WhatIsBgCard(pokemonHabOne)}`);
+  const bgColor = `#${WhatIsBgCard(pokemonHabOne)}`;
+
+  const styleBgColor = styleFunction(bgColor);
 
   useEffect(() => {
     catchPokemon(route.params.id);
@@ -140,6 +142,7 @@ export default function PokemonScreen({ route, navigation }) {
                 spd={pokemonSpd}
                 sa={pokemonSa}
                 sd={pokemonSd}
+                bgColor={bgColor}
               />
             </View>
           </View>
@@ -225,6 +228,7 @@ export default function PokemonScreen({ route, navigation }) {
                 spd={pokemonSpd}
                 sa={pokemonSa}
                 sd={pokemonSd}
+                bgColor={bgColor}
               />
             </View>
           </View>
@@ -290,7 +294,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
     fontSize: 22,
     textAlign: "center",
-    marginVertical: 10
+    marginVertical: 10,
   },
 });
 

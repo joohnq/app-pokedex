@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 
-export default function BarProgress({ hp, atk, def, spd, sa, sd }) {
+export default function BarProgress({ hp, atk, def, spd, sa, sd, bgColor }) {
   return (
     <View>
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>HP</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={hp / 300} color={"red"} />
+          <ProgressBar style={styles.bar} progress={hp / 300} color={bgColor} />
           <Text style={styles.mark}>{hp} / 300</Text>
         </View>
       </View>
@@ -18,7 +18,7 @@ export default function BarProgress({ hp, atk, def, spd, sa, sd }) {
           <ProgressBar
             style={styles.bar}
             progress={atk / 300}
-            color={"yellow"}
+            color={bgColor}
           />
           <Text style={styles.mark}>{atk} / 300</Text>
         </View>
@@ -26,21 +26,21 @@ export default function BarProgress({ hp, atk, def, spd, sa, sd }) {
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>DEFENCE</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={def / 300} color={"blue"} />
+          <ProgressBar style={styles.bar} progress={def / 300} color={bgColor} />
           <Text style={styles.mark}>{def} / 300</Text>
         </View>
       </View>
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>SPEED</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={spd / 300} color={"gray"} />
+          <ProgressBar style={styles.bar} progress={spd / 300} color={bgColor} />
           <Text style={styles.mark}>{spd} / 300</Text>
         </View>
       </View>
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>SPECIAL ATTACK</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={sa / 300} color={"green"} />
+          <ProgressBar style={styles.bar} progress={sa / 300} color={bgColor} />
           <Text style={styles.mark}>{sa} / 300</Text>
         </View>
       </View>
@@ -50,7 +50,7 @@ export default function BarProgress({ hp, atk, def, spd, sa, sd }) {
           <ProgressBar
             style={styles.bar}
             progress={sd / 300}
-            color={"purple"}
+            color={bgColor}
           />
           <Text style={styles.mark}>{sd} / 300</Text>
         </View>

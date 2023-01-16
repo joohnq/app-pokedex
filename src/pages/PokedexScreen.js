@@ -16,7 +16,10 @@ export default function PokedexScreen({ navigation }) {
   const [pokemonInput, setPokemonInput] = useState("");
 
   const handleSearch = () => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonInput}`).then(res => setListPokemons(res.data)).catch(err => console.log(err));
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon/${pokemonInput}`)
+      .then((res) => setListPokemons(res))
+      .catch((err) => console.log(err));
   };
 
   const catchPokemons = () => {
@@ -64,6 +67,7 @@ export default function PokedexScreen({ navigation }) {
           onChangeText={setPokemonInput}
           style={styles.input}
           cursorColor="#b4b4b4"
+          value={pokemonInput}
         />
         <TouchableOpacity style={styles.btnSearch} onPress={handleSearch}>
           <Ionicons name="search" size={30} color="#333" />
@@ -88,6 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingHorizontal: 20,
+    marginBottom: 10,
   },
 
   input: {
