@@ -2,8 +2,7 @@ import React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "react-native";
 
 import {
   useFonts,
@@ -41,16 +40,13 @@ export default function App() {
             component={PokedexScreen}
             options={{
               headerShown: true,
+              headerTitleAlign: "center",
+              headerShadowVisible: false,
               headerTitleStyle: {
                 fontFamily: "Poppins_700Bold",
                 fontSize: 34,
-                color: "#DE092D",
+                color: "#333",
               },
-              headerRight: () => (
-                <TouchableOpacity>
-                  <Ionicons name="search" size={30} color="#DE092D" />
-                </TouchableOpacity>
-              ),
             }}
           />
           <Stack.Screen
