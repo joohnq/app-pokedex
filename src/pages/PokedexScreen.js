@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import { FlatList, View } from "react-native";
 import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import axios from "axios";
@@ -47,13 +46,13 @@ export default function PokedexScreen({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
+    <View style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
       <FlatList
         data={listPokemons}
         renderItem={renderPokemon}
         keyExtractor={(item) => item.data.id}
         numColumns={2}
       />
-    </SafeAreaView>
+    </View>
   );
 }
