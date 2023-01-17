@@ -15,25 +15,25 @@ export default function PokedexScreen({ navigation }) {
   const [listPokemons, setListPokemons] = useState([]);
   const [pokemonInput, setPokemonInput] = useState("");
 
-  const handleSearch = () => {
-    axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${pokemonInput}`)
-      .then((res) => setListPokemons(res))
-      .catch((err) => console.log(err));
-  };
-
-  const catchPokemons = () => {
+  const catchPokemons = (value) => {
     const endpoints = [];
-    for (let i = 1; i <= 30; i++) {
-      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
+
+    if (typeof value === "number") {
+      for (let i = 1; i <= value; i++) {
+        endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
+      }
+    } else {
+      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${value}`);
     }
+
     axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
-      .then((data) => setListPokemons(data));
+      .then((res) => setListPokemons(res))
+      .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    catchPokemons();
+    catchPokemons(5);
   }, []);
 
   function renderPokemon({ item }) {
@@ -69,10 +69,13 @@ export default function PokedexScreen({ navigation }) {
           cursorColor="#b4b4b4"
           value={pokemonInput}
         />
-        <TouchableOpacity style={styles.btnSearch} onPress={handleSearch}>
+        <TouchableOpacity
+          style={styles.btnSearch}
+          onPress={() => catchPokemons(pokemonInput)}
+        >
           <Ionicons name="search" size={30} color="#333" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnSearch} onPress={catchPokemons}>
+        <TouchableOpacity style={styles.btnSearch} onPress={() => catchPokemons(30)}>
           <Ionicons name="refresh" size={30} color="#333" />
         </TouchableOpacity>
       </View>
