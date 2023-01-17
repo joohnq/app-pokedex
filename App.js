@@ -39,7 +39,6 @@ export default function App() {
             name="Pokedex"
             component={PokedexScreen}
             options={{
-              headerShown: true,
               headerTitleAlign: "center",
               headerShadowVisible: false,
               headerTitleStyle: {

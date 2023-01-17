@@ -11,7 +11,7 @@ import {
 function organizeId(id){
   if (Number(id) < 10) {
     return `#00${id}`;
-  } else if (Number(id) >= 10 && Number(id) <= 100) {
+  } else if (Number(id) >= 10 && Number(id) < 100) {
     return `#0${id}`;
   } else if (Number(id) >= 100) {
     return `#${id}`;
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     marginTop: 40,
-    elevation: 7,
+    elevation: 2,
   },
 
   pId: {

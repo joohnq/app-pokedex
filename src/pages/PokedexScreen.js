@@ -5,11 +5,16 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  Keyboard,
+  SafeAreaView,
+  ScrollView,
+  VirtualizedList,
 } from "react-native";
 import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import axios from "axios";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Feather } from "@expo/vector-icons";
+import EmptyListMessage from "../components/EmptyListMessage";
 
 export default function PokedexScreen({ navigation }) {
   const [listPokemons, setListPokemons] = useState([]);
@@ -23,17 +28,21 @@ export default function PokedexScreen({ navigation }) {
         endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
       }
     } else {
-      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${value}`);
+      endpoints.push(
+        `https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`
+      );
     }
 
     axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then((res) => setListPokemons(res))
       .catch((error) => console.log(error));
+
+    setPokemonInput("");
   };
 
   useEffect(() => {
-    catchPokemons(5);
+    catchPokemons(20);
   }, []);
 
   function renderPokemon({ item }) {
@@ -68,15 +77,25 @@ export default function PokedexScreen({ navigation }) {
           style={styles.input}
           cursorColor="#b4b4b4"
           value={pokemonInput}
+          placeholder="Pokemon Name"
         />
         <TouchableOpacity
           style={styles.btnSearch}
-          onPress={() => catchPokemons(pokemonInput)}
+          onPress={() => {
+            catchPokemons(pokemonInput);
+            Keyboard.dismiss();
+          }}
         >
           <Ionicons name="search" size={30} color="#333" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnSearch} onPress={() => catchPokemons(30)}>
-          <Ionicons name="refresh" size={30} color="#333" />
+        <TouchableOpacity
+          style={styles.btnRefresh}
+          onPress={() => {
+            catchPokemons(20);
+            Keyboard.dismiss();
+          }}
+        >
+          <Feather name="refresh-cw" size={30} color="#333" />
         </TouchableOpacity>
       </View>
       <FlatList
@@ -84,6 +103,8 @@ export default function PokedexScreen({ navigation }) {
         renderItem={renderPokemon}
         keyExtractor={(item) => item.data.id}
         numColumns={2}
+        ListEmptyComponent={EmptyListMessage}
+        style={{ backgroundColor: "#fff", height: "100%" }}
       />
     </View>
   );
@@ -100,11 +121,8 @@ const styles = StyleSheet.create({
 
   input: {
     width: "80%",
-    backgroundColor: "#f4f4f4",
+    backgroundColor: "#f5f5f5",
     marginRight: 10,
-    borderColor: "#adb5bd",
-    borderRadius: 5,
-    borderWidth: 1,
     paddingVertical: 5,
     paddingHorizontal: 10,
     fontSize: 16,
@@ -114,5 +132,6 @@ const styles = StyleSheet.create({
 
   btnSearch: {
     width: "10%",
+    marginRight: 10,
   },
 });
