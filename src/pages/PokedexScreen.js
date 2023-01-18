@@ -42,7 +42,7 @@ export default function PokedexScreen({ navigation }) {
   };
 
   useEffect(() => {
-    catchPokemons(20);
+    catchPokemons(100);
   }, []);
 
   function renderPokemon({ item }) {
@@ -91,21 +91,23 @@ export default function PokedexScreen({ navigation }) {
         <TouchableOpacity
           style={styles.btnRefresh}
           onPress={() => {
-            catchPokemons(20);
+            catchPokemons(100);
             Keyboard.dismiss();
           }}
         >
           <Feather name="refresh-cw" size={30} color="#333" />
         </TouchableOpacity>
       </View>
-      <FlatList
-        data={listPokemons}
-        renderItem={renderPokemon}
-        keyExtractor={(item) => item.data.id}
-        numColumns={2}
-        ListEmptyComponent={EmptyListMessage}
-        style={{ backgroundColor: "#fff", height: "100%" }}
-      />
+      <View style={{ height: "92.5%" }}>
+        <FlatList
+          data={listPokemons}
+          renderItem={renderPokemon}
+          keyExtractor={(item) => item.data.id}
+          numColumns={2}
+          ListEmptyComponent={EmptyListMessage}
+          style={{ backgroundColor: "#fff" }}
+        />
+      </View>
     </View>
   );
 }
@@ -115,8 +117,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 20,
     marginBottom: 10,
+    paddingHorizontal: 20,
   },
 
   input: {
