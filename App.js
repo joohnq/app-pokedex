@@ -39,13 +39,14 @@ export default function App() {
             name="Pokedex"
             component={PokedexScreen}
             options={{
-              headerTitleAlign: "center",
-              headerShadowVisible: false,
-              headerTitleStyle: {
-                fontFamily: "Poppins_700Bold",
-                fontSize: 34,
-                color: "#333",
-              },
+              headerShown: false,
+              // headerTitleAlign: "center",
+              // headerShadowVisible: false,
+              // headerTitleStyle: {
+              //   fontFamily: "Poppins_700Bold",
+              //   fontSize: 34,
+              //   color: "#333",
+              // },
             }}
           />
           <Stack.Screen

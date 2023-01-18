@@ -8,7 +8,7 @@ import {
   ImageBackground,
 } from "react-native";
 
-function organizeId(id){
+function organizeId(id) {
   if (Number(id) < 10) {
     return `#00${id}`;
   } else if (Number(id) >= 10 && Number(id) < 100) {
@@ -25,17 +25,14 @@ export default function CardPokemon({
   cover,
   name,
   id,
-  navigation
+  navigation,
 }) {
-
   const styleBgColor = styleFunction(`#${bgColor}`);
 
   if (habilitieTwo == "null") {
     return (
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("PokemonDetail", { id: id })
-        }
+        onPress={() => navigation.navigate("PokemonDetail", { id: id })}
         style={[styles.cardPokemon, styleBgColor.cardPokemon]}
       >
         <View>

@@ -6,15 +6,13 @@ import {
   TextInput,
   StyleSheet,
   Keyboard,
-  SafeAreaView,
-  ScrollView,
-  VirtualizedList,
+  Text,
 } from "react-native";
 import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
 import axios from "axios";
 import { Ionicons, Feather } from "@expo/vector-icons";
-import EmptyListMessage from "../components/EmptyListMessage";
+import Loading from "../components/Loading";
 
 export default function PokedexScreen({ navigation }) {
   const [listPokemons, setListPokemons] = useState([]);
@@ -42,24 +40,20 @@ export default function PokedexScreen({ navigation }) {
   };
 
   useEffect(() => {
-    catchPokemons(100);
+    catchPokemons(40);
   }, []);
 
   function renderPokemon({ item }) {
-    let habilitieTwo;
-
-    if (item.data.types[1] == undefined) {
-      habilitieTwo = "null";
-    } else {
-      habilitieTwo = item.data.types[1].type.name;
-    }
-
     return (
       <View style={{ width: "50%" }}>
         <CardPokemon
           name={item.data.name}
           habilitieOne={item.data.types[0].type.name}
-          habilitieTwo={habilitieTwo}
+          habilitieTwo={
+            item.data.types[1] == undefined
+              ? "null"
+              : item.data.types[1].type.name
+          }
           cover={item.data.sprites.other["official-artwork"].front_default}
           bgColor={WhatIsBgCard(item.data.types[0].type.name)}
           id={item.data.id}
@@ -70,7 +64,7 @@ export default function PokedexScreen({ navigation }) {
   }
 
   return (
-    <View style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
+    <>
       <View style={styles.searchCamp}>
         <TextInput
           onChangeText={setPokemonInput}
@@ -91,24 +85,28 @@ export default function PokedexScreen({ navigation }) {
         <TouchableOpacity
           style={styles.btnRefresh}
           onPress={() => {
-            catchPokemons(100);
+            catchPokemons(40);
             Keyboard.dismiss();
           }}
         >
           <Feather name="refresh-cw" size={30} color="#333" />
         </TouchableOpacity>
       </View>
-      <View style={{ height: "92.5%" }}>
+      <View>
         <FlatList
           data={listPokemons}
           renderItem={renderPokemon}
           keyExtractor={(item) => item.data.id}
           numColumns={2}
-          ListEmptyComponent={EmptyListMessage}
+          ListEmptyComponent={Loading}
           style={{ backgroundColor: "#fff" }}
         />
+        <TouchableOpacity>
+          <Text>Show More</Text>
+          <Feather name="chevron-down" size={20} color="#555" />
+        </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 }
 
