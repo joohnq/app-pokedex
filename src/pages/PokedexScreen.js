@@ -20,7 +20,7 @@ export default function PokedexScreen({ navigation }) {
   const [listPokemons, setListPokemons] = useState([]);
   const [pokemonInput, setPokemonInput] = useState("");
 
-  const catchPokemons = (value) => {
+  async function catchPokemons(value){
     const endpoints = [];
 
     if (typeof value === "number") {
@@ -33,7 +33,7 @@ export default function PokedexScreen({ navigation }) {
       );
     }
 
-    axios
+    await axios
       .all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then((res) => setListPokemons(res))
       .catch((error) => console.log(error));

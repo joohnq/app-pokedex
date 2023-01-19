@@ -21,14 +21,13 @@ export default function PokemonScreen({ route, navigation }) {
   const [pokemonDesc, setPokemonDesc] = useState("Loading...");
   const [pokemonHabOne, setPokemonHabOne] = useState("Loading...");
   const [pokemonHabTwo, setPokemonHabTwo] = useState("");
-
   const [pokemonHp, setPokemonHp] = useState("");
   const [pokemonAtk, setPokemonAtk] = useState("");
   const [pokemonDef, setPokemonDef] = useState("");
   const [pokemonSpd, setPokemonSpd] = useState("");
   const [pokemonSa, setPokemonSa] = useState("");
   const [pokemonSd, setPokemonSd] = useState("");
-  
+
   const [bgColor, setBgColor] = useState("fff");
 
   const styleBgColor = styleFunction(bgColor);
@@ -37,9 +36,9 @@ export default function PokemonScreen({ route, navigation }) {
     catchPokemon(route.params.id);
   }, []);
 
-  const catchPokemon = async (id) => {
+  async function catchPokemon(id) {
     await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
-      setBgColor(WhatIsBgCard(res.data.types[0].type.name))
+      setBgColor(WhatIsBgCard(res.data.types[0].type.name));
       setPokemonName(res.data.name);
       setPokemonWeight(res.data.weight);
       setPokemonCover(res.data.sprites.other["official-artwork"].front_default);
@@ -57,15 +56,17 @@ export default function PokemonScreen({ route, navigation }) {
       setPokemonSpd(res.data.stats[5].base_stat);
     });
 
-    await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
-      res.data.flavor_text_entries.filter((item) => {
-        if (item.language.name == "en" && item.version.name == "red") {
-          const newText = item.flavor_text.replace(/(\r\n|\n|\r)/gm, " ");
-          setPokemonDesc(newText);
-        }
+    await axios
+      .get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+      .then((res) => {
+        res.data.flavor_text_entries.filter((item) => {
+          if (item.language.name == "en" && item.version.name == "red") {
+            const newText = item.flavor_text.replace(/(\r\n|\n|\r)/gm, " ");
+            setPokemonDesc(newText);
+          }
+        });
       });
-    });
-  };
+  }
 
   if (pokemonHabTwo == "") {
     return (
