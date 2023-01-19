@@ -40,7 +40,7 @@ export default function PokedexScreen({ navigation }) {
   };
 
   useEffect(() => {
-    catchPokemons(40);
+    catchPokemons(30);
   }, []);
 
   function renderPokemon({ item }) {
@@ -92,19 +92,21 @@ export default function PokedexScreen({ navigation }) {
           <Feather name="refresh-cw" size={30} color="#333" />
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{paddingTop: 50}}>
         <FlatList
           data={listPokemons}
           renderItem={renderPokemon}
           keyExtractor={(item) => item.data.id}
           numColumns={2}
           ListEmptyComponent={Loading}
-          style={{ backgroundColor: "#fff" }}
+          style={{
+            backgroundColor: "#fff",
+          }}
         />
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text>Show More</Text>
-          <Feather name="chevron-down" size={20} color="#555" />
-        </TouchableOpacity>
+          <Feather name="chevron-down" size={30} color="#555" />
+        </TouchableOpacity> */}
       </View>
     </>
   );
@@ -112,11 +114,15 @@ export default function PokedexScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   searchCamp: {
+    position: "absolute",
+    zIndex: 1,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 10,
     paddingHorizontal: 20,
+    paddingVertical: 10,
+    width: "100%",
+    backgroundColor: "#fff"
   },
 
   input: {

@@ -120,8 +120,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     padding: 10,
     marginHorizontal: 5,
+    marginBottom: 10,
     borderRadius: 10,
-    marginTop: 40,
+    marginTop: 30,
     elevation: 2,
   },
 
