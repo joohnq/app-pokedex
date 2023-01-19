@@ -8,6 +8,7 @@ import {
   Keyboard,
   StatusBar,
   Text,
+  Pressable,
 } from "react-native";
 import CardPokemon from "../components/CardPokemon";
 import WhatIsBgCard from "../components/WhatIsBgCard";
@@ -41,7 +42,7 @@ export default function PokedexScreen({ navigation }) {
   };
 
   useEffect(() => {
-    catchPokemons(30);
+    catchPokemons(40);
   }, []);
 
   function renderPokemon({ item }) {
@@ -71,7 +72,7 @@ export default function PokedexScreen({ navigation }) {
         backgroundColor="#fff"
         translucent={false}
       />
-      <View style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
+      <Pressable onPress={Keyboard.dismiss} style={styles.container}>
         <View style={styles.searchCamp}>
           <TextInput
             onChangeText={setPokemonInput}
@@ -115,37 +116,38 @@ export default function PokedexScreen({ navigation }) {
           <Feather name="chevron-down" size={30} color="#555" />
         </TouchableOpacity> */}
         </View>
-      </View>
+      </Pressable>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 10,
+    backgroundColor: "#fff",
+    height: "100%",
+  },
+
   searchCamp: {
     position: "absolute",
     zIndex: 1,
+    left: 15,
+    right: 15,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
     backgroundColor: "#fff",
   },
 
   input: {
-    width: "80%",
+    width: "75%",
+    height: 40,
     backgroundColor: "#f5f5f5",
-    marginRight: 10,
     paddingVertical: 5,
     paddingHorizontal: 10,
     fontSize: 16,
     color: "#333",
     fontFamily: "Poppins_600SemiBold",
     borderRadius: 5,
-  },
-
-  btnSearch: {
-    width: "10%",
-    marginRight: 10,
   },
 });

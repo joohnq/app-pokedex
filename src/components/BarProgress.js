@@ -26,14 +26,22 @@ export default function BarProgress({ hp, atk, def, spd, sa, sd, bgColor }) {
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>DEFENCE</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={def / 300} color={bgColor} />
+          <ProgressBar
+            style={styles.bar}
+            progress={def / 300}
+            color={bgColor}
+          />
           <Text style={styles.mark}>{def} / 300</Text>
         </View>
       </View>
       <View style={{ marginTop: 5 }}>
         <Text style={styles.title}>SPEED</Text>
         <View>
-          <ProgressBar style={styles.bar} progress={spd / 300} color={bgColor} />
+          <ProgressBar
+            style={styles.bar}
+            progress={spd / 300}
+            color={bgColor}
+          />
           <Text style={styles.mark}>{spd} / 300</Text>
         </View>
       </View>
@@ -47,11 +55,7 @@ export default function BarProgress({ hp, atk, def, spd, sa, sd, bgColor }) {
       <View style={{ marginBottom: 5 }}>
         <Text style={styles.title}>SPECIAL DEFENCE</Text>
         <View>
-          <ProgressBar
-            style={styles.bar}
-            progress={sd / 300}
-            color={bgColor}
-          />
+          <ProgressBar style={styles.bar} progress={sd / 300} color={bgColor} />
           <Text style={styles.mark}>{sd} / 300</Text>
         </View>
       </View>
