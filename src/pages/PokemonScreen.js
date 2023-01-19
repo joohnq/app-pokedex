@@ -28,8 +28,8 @@ export default function PokemonScreen({ route, navigation }) {
   const [pokemonSpd, setPokemonSpd] = useState("");
   const [pokemonSa, setPokemonSa] = useState("");
   const [pokemonSd, setPokemonSd] = useState("");
-
-  const bgColor = `#${WhatIsBgCard(pokemonHabOne)}`;
+  
+  const [bgColor, setBgColor] = useState("fff");
 
   const styleBgColor = styleFunction(bgColor);
 
@@ -37,8 +37,9 @@ export default function PokemonScreen({ route, navigation }) {
     catchPokemon(route.params.id);
   }, []);
 
-  const catchPokemon = (id) => {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
+  const catchPokemon = async (id) => {
+    await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((res) => {
+      setBgColor(WhatIsBgCard(res.data.types[0].type.name))
       setPokemonName(res.data.name);
       setPokemonWeight(res.data.weight);
       setPokemonCover(res.data.sprites.other["official-artwork"].front_default);
@@ -56,7 +57,7 @@ export default function PokemonScreen({ route, navigation }) {
       setPokemonSpd(res.data.stats[5].base_stat);
     });
 
-    axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
+    await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`).then((res) => {
       res.data.flavor_text_entries.filter((item) => {
         if (item.language.name == "en" && item.version.name == "red") {
           const newText = item.flavor_text.replace(/(\r\n|\n|\r)/gm, " ");
@@ -69,7 +70,11 @@ export default function PokemonScreen({ route, navigation }) {
   if (pokemonHabTwo == "") {
     return (
       <>
-        <StatusBar translucent={false}></StatusBar>
+        <StatusBar
+          barStyle="auto"
+          backgroundColor={`#${bgColor}`}
+          translucent={false}
+        />
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
             <View
@@ -142,7 +147,7 @@ export default function PokemonScreen({ route, navigation }) {
                 spd={pokemonSpd}
                 sa={pokemonSa}
                 sd={pokemonSd}
-                bgColor={bgColor}
+                bgColor={`#${bgColor}`}
               />
             </View>
           </View>
@@ -152,7 +157,11 @@ export default function PokemonScreen({ route, navigation }) {
   } else {
     return (
       <>
-        <StatusBar translucent={false}></StatusBar>
+        <StatusBar
+          barStyle="auto"
+          backgroundColor={`#${bgColor}`}
+          translucent={false}
+        />
         <ScrollView>
           <View style={[styles.sectionCover, styleBgColor.sectionCover]}>
             <View
@@ -228,7 +237,7 @@ export default function PokemonScreen({ route, navigation }) {
                 spd={pokemonSpd}
                 sa={pokemonSa}
                 sd={pokemonSd}
-                bgColor={bgColor}
+                bgColor={`#${bgColor}`}
               />
             </View>
           </View>
@@ -301,6 +310,6 @@ const styles = StyleSheet.create({
 const styleFunction = (bgColor) =>
   StyleSheet.create({
     sectionCover: {
-      backgroundColor: bgColor,
+      backgroundColor: `#${bgColor}`,
     },
   });

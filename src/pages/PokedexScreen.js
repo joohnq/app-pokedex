@@ -6,6 +6,7 @@ import {
   TextInput,
   StyleSheet,
   Keyboard,
+  StatusBar,
   Text,
 } from "react-native";
 import CardPokemon from "../components/CardPokemon";
@@ -65,48 +66,55 @@ export default function PokedexScreen({ navigation }) {
 
   return (
     <>
-      <View style={styles.searchCamp}>
-        <TextInput
-          onChangeText={setPokemonInput}
-          style={styles.input}
-          cursorColor="#b4b4b4"
-          value={pokemonInput}
-          placeholder="Pokemon Name"
-        />
-        <TouchableOpacity
-          style={styles.btnSearch}
-          onPress={() => {
-            catchPokemons(pokemonInput);
-            Keyboard.dismiss();
-          }}
-        >
-          <Ionicons name="search" size={30} color="#333" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.btnRefresh}
-          onPress={() => {
-            catchPokemons(40);
-            Keyboard.dismiss();
-          }}
-        >
-          <Feather name="refresh-cw" size={30} color="#333" />
-        </TouchableOpacity>
-      </View>
-      <View style={{paddingTop: 50}}>
-        <FlatList
-          data={listPokemons}
-          renderItem={renderPokemon}
-          keyExtractor={(item) => item.data.id}
-          numColumns={2}
-          ListEmptyComponent={Loading}
-          style={{
-            backgroundColor: "#fff",
-          }}
-        />
-        {/* <TouchableOpacity>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="#fff"
+        translucent={false}
+      />
+      <View style={{ paddingHorizontal: 10, backgroundColor: "#fff" }}>
+        <View style={styles.searchCamp}>
+          <TextInput
+            onChangeText={setPokemonInput}
+            style={styles.input}
+            cursorColor="#b4b4b4"
+            value={pokemonInput}
+            placeholder="Pokemon Name"
+          />
+          <TouchableOpacity
+            style={styles.btnSearch}
+            onPress={() => {
+              catchPokemons(pokemonInput);
+              Keyboard.dismiss();
+            }}
+          >
+            <Ionicons name="search" size={30} color="#333" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btnRefresh}
+            onPress={() => {
+              catchPokemons(40);
+              Keyboard.dismiss();
+            }}
+          >
+            <Feather name="refresh-cw" size={30} color="#333" />
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingTop: 50 }}>
+          <FlatList
+            data={listPokemons}
+            renderItem={renderPokemon}
+            keyExtractor={(item) => item.data.id}
+            numColumns={2}
+            ListEmptyComponent={Loading}
+            style={{
+              backgroundColor: "#fff",
+            }}
+          />
+          {/* <TouchableOpacity>
           <Text>Show More</Text>
           <Feather name="chevron-down" size={30} color="#555" />
         </TouchableOpacity> */}
+        </View>
       </View>
     </>
   );
@@ -121,8 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 10,
-    width: "100%",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
 
   input: {
@@ -134,6 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#333",
     fontFamily: "Poppins_600SemiBold",
+    borderRadius: 5,
   },
 
   btnSearch: {
